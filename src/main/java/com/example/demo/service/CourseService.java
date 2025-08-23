@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CourseDao;
@@ -10,13 +11,14 @@ import com.example.demo.entity.Course;
 import com.example.demo.util.CourseUtil;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
+
 
 @Service
-@RequiredArgsConstructor
 public class CourseService {
-
-	private final CourseDao courseDao;
+	@Autowired
+	private CourseDao courseDao;
+ 
+	
 	
 	public List<CourseDto> listAllCourses(){
 		return courseDao.findAll()
@@ -29,8 +31,9 @@ public class CourseService {
 				.map(CourseUtil::toDto)
 				.orElseThrow(EntityNotFoundException::new);
 	}
-	public CourseDto createCourse(CourseDto courseDto) {
+	public CourseDto createCourse(CourseDto courseDto){
 		Course course = CourseUtil.toEntity(courseDto);
+		course.setCourseImg(courseDto.getCourseImg());
 		return CourseUtil.toDto(courseDao.save(course));
 	}
 	

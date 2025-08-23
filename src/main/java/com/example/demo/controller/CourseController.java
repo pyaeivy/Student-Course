@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.CourseDto;
 import com.example.demo.service.CourseService;
 
-import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("course")
 public class CourseController {
-
-	private final CourseService courseService;
+	@Autowired
+	private CourseService courseService;
 
 	
 	@GetMapping("/all")
@@ -33,6 +32,12 @@ public class CourseController {
 	}
 	@PostMapping("/create")
 	public ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto courseDto) {
-		return ResponseEntity.ok(courseService.createCourse(courseDto));
+		try {
+			CourseDto course = courseService.createCourse(courseDto);
+			return ResponseEntity.ok(course);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().build();
+		}
 	}
 }

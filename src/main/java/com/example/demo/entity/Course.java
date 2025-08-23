@@ -10,10 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "course")
 public class Course {
 
@@ -32,6 +30,54 @@ public class Course {
 		stu.setCourse(this);
 		students.add(stu);
 		
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCourseName() {
+		return this.courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getInstructor() {
+		return this.instructor;
+	}
+
+	public void setInstructor(String instructor) {
+		this.instructor = instructor;
+	}
+
+	public double getPrice() {
+		return this.price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getCourseImg() {
+		return this.courseImg;
+	}
+
+	public void setCourseImg(String courseImg) {
+		this.courseImg = courseImg;
+	}
+
+	public List<Student> getStudents() {
+		return this.students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
 	
 }

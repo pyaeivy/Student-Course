@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dao.CourseDao;
@@ -12,14 +13,13 @@ import com.example.demo.entity.Student;
 import com.example.demo.util.StudentUtil;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class StudentService {
-
-	private final StudentDao studentDao;
-	private final CourseDao courseDao;
+	@Autowired
+	private  StudentDao studentDao;
+	@Autowired
+	private  CourseDao courseDao;
 	
 	
 	public List<StudentDto> listAllStudents(){
