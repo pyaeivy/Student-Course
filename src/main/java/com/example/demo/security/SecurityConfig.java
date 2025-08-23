@@ -1,5 +1,7 @@
 package com.example.demo.security;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 public class SecurityConfig {
@@ -33,6 +39,24 @@ public class SecurityConfig {
 			c.anyRequest().authenticated();
 		
 		});
+		
+		http.cors( c -> {
+            CorsConfigurationSource source=new CorsConfigurationSource() {
+
+				@Override
+				public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+					 CorsConfiguration config=new CorsConfiguration();
+                     config.setAllowCredentials(true);
+                     config.setAllowedOrigins(List.of("http://localhost:5173","http://localhost:4200"));
+                     config.setAllowedHeaders(List.of("*"));
+                     config.setAllowedMethods(List.of("*"));
+                     config.setExposedHeaders(List.of("*"));
+                     return config;
+				}
+                
+            };
+            c.configurationSource(source);
+        });
 			
 		http.csrf(c -> c.disable());
 		return http.build();
