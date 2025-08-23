@@ -1,26 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
+
 import { Student } from '../../model/Student';
 import { StudentService } from '../service/student-service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-list',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './student-list.html',
-  styleUrl: './student-list.css'
+  styleUrls: ['./student-list.css']
 })
 export class StudentList {
+  student$: Observable<Student[]>;
 
-
-  student:Student[] = [];
-
-  studentService = inject(StudentService);
-
-  student$:Observable<Student[]> = this.studentService.student$;
-
-  
-
-
-
-
+  constructor(private studentService: StudentService) {
+    this.student$ = this.studentService.student$;
+    this.studentService.getAllStudents().subscribe(); // ✅ Trigger initial fetch
+  }
 }
