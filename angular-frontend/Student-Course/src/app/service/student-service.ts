@@ -50,5 +50,5 @@ export class StudentService {
 }
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Student } from '../../model/Student';import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { Student } from '../model/Student';import { BehaviorSubject, Observable, tap } from 'rxjs';
 

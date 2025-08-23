@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
+@CrossOrigin("*")
 public class SecurityConfig {
 	
 	@Bean
@@ -35,7 +37,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http.httpBasic(Customizer.withDefaults());
 		http.authorizeHttpRequests(c -> {
-			c.requestMatchers("/api/auth/**").permitAll();
+			c.requestMatchers("/api/**").permitAll();
 			c.anyRequest().authenticated();
 		
 		});

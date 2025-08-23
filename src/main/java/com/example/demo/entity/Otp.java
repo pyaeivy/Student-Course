@@ -14,6 +14,7 @@ public class Otp {
 	private Long id;
 	private String username;
 	private String code;
+	
 	public Long getId() {
 		return id;
 	}
@@ -32,8 +33,6 @@ public class Otp {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
-	
 	
 
 }

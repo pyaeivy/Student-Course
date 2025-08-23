@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 
-import { Student } from '../../model/Student';
+import { Student } from '../model/Student';
 import { StudentService } from '../service/student-service';
 
 @Component({
