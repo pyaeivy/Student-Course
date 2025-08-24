@@ -26,10 +26,13 @@ public class CourseController {
 	public List<CourseDto> listAllCourses(){
 		return courseService.listAllCourses();
 	}
+	
 	@GetMapping("/{id}")
 	public CourseDto findCourseById(@PathVariable long id) {
 		return courseService.findCourseById(id);
 	}
+	
+	
 	@PostMapping("/create")
 	public ResponseEntity<CourseDto> createCourse(@RequestBody CourseDto courseDto) {
 		try {

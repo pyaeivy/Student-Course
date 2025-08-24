@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
+@CrossOrigin("*")
 public class SecurityConfig {
 	
 	@Bean
@@ -36,8 +38,13 @@ public class SecurityConfig {
 		
 		http.httpBasic(Customizer.withDefaults());
 		http.authorizeHttpRequests(c -> {
+<<<<<<< HEAD
 			
 			c.anyRequest().permitAll();
+=======
+			c.requestMatchers("/api/**").permitAll();
+			c.anyRequest().authenticated();
+>>>>>>> 79a271e99e42afbfa1781c193a2cc3408bd45fa2
 		
 		});
 		http.csrf(c -> c.disable());
