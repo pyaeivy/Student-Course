@@ -55,8 +55,8 @@ public class AuthService {
 		
 	}
 	
-	public String login(String username,String password) {
-		var auth = new UsernamePasswordAuthenticationToken(username, password);
+	public String login(String email,String password) {
+		var auth = new UsernamePasswordAuthenticationToken(email, password);
 		Authentication authen = authManager.authenticate(auth);
 		SecurityContextHolder.getContext().setAuthentication(authen);
 		

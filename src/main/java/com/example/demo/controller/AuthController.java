@@ -19,7 +19,7 @@ public class AuthController {
 	private AuthService authService;
 	
 	record signUpRequest(String username,String password,String email,String phoneNumber) {}
-	record loginRequest(String username,String password) {}
+	record loginRequest(String email,String password) {}
 	record otpRequest(String username,String code) {}
 	
 	@PostMapping("/signUp")
@@ -30,7 +30,7 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<String> login(@RequestBody loginRequest request){
-		String res = authService.login(request.username, request.password);
+		String res = authService.login(request.email, request.password);
 		return ResponseEntity.ok(res);
 	}
 	

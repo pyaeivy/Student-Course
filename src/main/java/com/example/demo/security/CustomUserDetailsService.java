@@ -15,10 +15,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private UserDao userDao;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		return userDao.findByUsername(username).map(SecurityUser::new)
-				.orElseThrow(() -> new UsernameNotFoundException(username));
+		return userDao.findByEmail(email).map(SecurityUser::new)
+				.orElseThrow(() -> new UsernameNotFoundException(email));
 	}
 
 }

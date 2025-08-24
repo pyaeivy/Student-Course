@@ -33,12 +33,14 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+		
 		http.httpBasic(Customizer.withDefaults());
 		http.authorizeHttpRequests(c -> {
-			c.requestMatchers("/api/auth/**").permitAll();
-			c.anyRequest().authenticated();
+			
+			c.anyRequest().permitAll();
 		
 		});
+		http.csrf(c -> c.disable());
 		
 		http.cors( c -> {
             CorsConfigurationSource source=new CorsConfigurationSource() {
@@ -58,7 +60,7 @@ public class SecurityConfig {
             c.configurationSource(source);
         });
 			
-		http.csrf(c -> c.disable());
+		
 		return http.build();
 	}
 

@@ -29,6 +29,10 @@ public class SecurityUser implements UserDetails {
 		// TODO Auto-generated method stub
 		return user.getPassword();
 	}
+	
+	public String getEmail() {
+		return user.getEmail();
+	}
 
 	@Override
 	public String getUsername() {
