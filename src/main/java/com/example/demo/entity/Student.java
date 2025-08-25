@@ -1,11 +1,15 @@
 package com.example.demo.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -24,8 +28,12 @@ public class Student {
 	private String status;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	@ManyToOne
-	private Course course;
+	@ManyToMany
+	private Set<Course> courses=new HashSet<>();
+	
+	public void addCourse(Course co) {
+		this.courses.add(co);
+	}
 	
 
 	public Long getId() {
@@ -92,12 +100,14 @@ public class Student {
 		this.gender = gender;
 	}
 
-	public Course getCourse() {
-		return this.course;
+	public Set<Course> getCourses() {
+		return courses;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
 	}
+
+
 	
 }

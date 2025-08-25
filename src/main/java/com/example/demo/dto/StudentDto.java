@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.util.List;
+
 import com.example.demo.entity.Gender;
 
 public class StudentDto {
@@ -12,24 +14,8 @@ public class StudentDto {
 	private String phone;
 	private String status;
 	private Gender gender;
-	private long courseId;
-	private String courseName;
 
-	public StudentDto(){}
-
-	public StudentDto(Long id, String name, String email, int age, String address, String phone, String status, Gender gender, long courseId, String courseName) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.age = age;
-		this.address = address;
-		this.phone = phone;
-		this.status = status;
-		this.gender = gender;
-		this.courseId = courseId;
-		this.courseName = courseName;
-	}
-
+	
 
 	public Long getId() {
 		return this.id;
@@ -95,19 +81,6 @@ public class StudentDto {
 		this.gender = gender;
 	}
 
-	public long getCourseId() {
-		return this.courseId;
-	}
 
-	public void setCourseId(long courseId) {
-		this.courseId = courseId;
-	}
-
-	public String getCourseName() {
-		return this.courseName;
-	}
-
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
-	}
+	
 }

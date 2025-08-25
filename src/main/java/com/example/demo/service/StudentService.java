@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.dao.CourseDao;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.dto.StudentDto;
-import com.example.demo.entity.Course;
 import com.example.demo.entity.Student;
 import com.example.demo.util.StudentUtil;
 
@@ -35,23 +34,21 @@ public class StudentService {
 				.orElseThrow(EntityNotFoundException::new);
 	}
 	
-	public StudentDto createStudent(StudentDto stuDto) {
-		Student stu = StudentUtil.toEntity(stuDto);
-		Course course = courseDao.findById(stuDto.getCourseId()).orElseThrow(() -> new RuntimeException("Course not found with id: "+ stuDto.getCourseId()));
-		stu.setCourse(course);
-		course.getStudents().add(stu);
-		return StudentUtil.toDto(studentDao.save(stu));
+	public String createStudent(Student stu) {
+		Student s=new Student();
+		s.setName(stu.getName());
+		s.setEmail(stu.getEmail());
+		s.setAddress(stu.getAddress());
+		s.setPhone(stu.getPhone());
+		s.setAge(stu.getAge());
+		s.setGender(stu.getGender());
+		s.setStatus(stu.getStatus());
+		studentDao.save(s);
+		return "%s is successfully created".formatted(stu.getName());
+		
 	}
 	
-	public StudentDto updateStudent(long id, StudentDto stuDto) {
-		if (studentDao.existsById(id)) {
-			Student stu = StudentUtil.toEntity(stuDto);
-			stu.setId(id);
-			return StudentUtil.toDto(studentDao.save(stu));
-		}else {
-			throw new EntityNotFoundException("Employee Not found!");
-		}
-	}
+
 	public String deleteStudent(long id) {
 		if (studentDao.existsById(id)) {
 			studentDao.deleteById(id);
@@ -59,6 +56,22 @@ public class StudentService {
 		}else {
 			throw new EntityNotFoundException("Employee not found!");
 		}
+	}
+
+	public String updateStudent(long id, Student stu) {
+		Student st=studentDao.findById(id).get();
+		st.setId(id);
+		st.setName(stu.getName());
+		st.setAddress(stu.getAddress());
+		st.setAge(stu.getAge());
+		st.setEmail(stu.getEmail());
+		st.setGender(stu.getGender());
+		st.setStatus(stu.getStatus());
+		st.setPhone(stu.getPhone());
+		studentDao.saveAndFlush(st);
+		
+		// TODO Auto-generated method stub
+		return "Student Id %s is successfully updated".formatted(st.getId());
 	}
 }
 

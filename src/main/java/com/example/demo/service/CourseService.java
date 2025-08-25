@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dao.CourseDao;
 import com.example.demo.dto.CourseDto;
@@ -31,10 +33,16 @@ public class CourseService {
 				.map(CourseUtil::toDto)
 				.orElseThrow(EntityNotFoundException::new);
 	}
-	public CourseDto createCourse(CourseDto courseDto){
-		Course course = CourseUtil.toEntity(courseDto);
-		course.setCourseImg(courseDto.getCourseImg());
-		return CourseUtil.toDto(courseDao.save(course));
+	
+	public String  createCourse(Course course,MultipartFile file) throws IOException{
+		Course c=new Course();
+		c.setCourseName(course.getCourseName());
+		c.setInstructor(course.getInstructor());
+		c.setPrice(course.getPrice());
+		c.setCourseImg(file.getBytes());
+		courseDao.save(c);
+		
+		return "%s is successfully created".formatted(course.getCourseName());
 	}
 	
 }

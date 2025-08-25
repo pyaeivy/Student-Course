@@ -3,12 +3,13 @@ package com.example.demo.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,16 +22,14 @@ public class Course {
 	private String courseName;
 	private String instructor;
 	private double price;
-	private String courseImg;
+	@Lob
+	@Column(columnDefinition = "VARBINARY(MAX)")
+	private byte[] courseImg;
 	
-	@OneToMany(mappedBy = "course")
+	@ManyToMany(mappedBy = "courses")
 	private List<Student> students = new ArrayList<>();
 	
-	public void addStudent(Student stu) {
-		stu.setCourse(this);
-		students.add(stu);
-		
-	}
+
 
 	public Long getId() {
 		return this.id;
@@ -64,11 +63,12 @@ public class Course {
 		this.price = price;
 	}
 
-	public String getCourseImg() {
-		return this.courseImg;
+
+	public byte[] getCourseImg() {
+		return courseImg;
 	}
 
-	public void setCourseImg(String courseImg) {
+	public void setCourseImg(byte[] courseImg) {
 		this.courseImg = courseImg;
 	}
 

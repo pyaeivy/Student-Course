@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.util.Base64;
+
 public class CourseDto {
 
 
@@ -45,8 +47,8 @@ public class CourseDto {
 		return this.courseImg;
 	}
 
-	public void setCourseImg(String courseImg) {
-		this.courseImg = courseImg;
+	public void setCourseImg(byte[] courseImg) {
+		this.courseImg = Base64.getEncoder().encodeToString(courseImg);
 	}
 	
 

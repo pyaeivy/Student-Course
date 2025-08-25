@@ -11,10 +11,6 @@ public class StudentUtil {
 
 		StudentDto stuDto = new StudentDto();
 		BeanUtils.copyProperties(stu, stuDto);
-		if (stu.getCourse() != null) {
-			stuDto.setCourseId(stu.getCourse().getId());
-			stuDto.setCourseName(stu.getCourse().getCourseName());
-		}
 		return stuDto;
 	}
 
