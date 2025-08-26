@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 import { Student } from '../model/Student';
 import { StudentService } from '../service/student-service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-student-details',
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,RouterOutlet],
   templateUrl: './student-details.html',
   styleUrl: './student-details.css'
 })

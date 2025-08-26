@@ -38,13 +38,11 @@ public class SecurityConfig {
 		
 		http.httpBasic(Customizer.withDefaults());
 		http.authorizeHttpRequests(c -> {
-<<<<<<< HEAD
-			
+
 			c.anyRequest().permitAll();
-=======
-			c.requestMatchers("/api/**").permitAll();
-			c.anyRequest().authenticated();
->>>>>>> 79a271e99e42afbfa1781c193a2cc3408bd45fa2
+
+			
+
 		
 		});
 		http.csrf(c -> c.disable());

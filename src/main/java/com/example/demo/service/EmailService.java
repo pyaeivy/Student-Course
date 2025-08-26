@@ -40,7 +40,7 @@ public class EmailService {
 	
 	@PostMapping("/update/{email}")
 	public String updatePassword(@PathVariable("email")String email,@RequestParam("password")String password){
-		User user=userDao.findByEmail(email);
+		User user=userDao.findByemail(email);
 		user.setPassword(passwordEncoder.encode(password));
 		userDao.save(user);
 		return "%s is successfully updated for %s".formatted(email,password);
@@ -50,7 +50,7 @@ public class EmailService {
 
 	@PostMapping("/{email}/{fOtp}")
 	public String validateOtp(@PathVariable("email")String email,@PathVariable("fOtp") String fOtp) {
-		User user=userDao.findByEmail(email);
+		User user=userDao.findByemail(email);
 	String otp=user.getOtp();//database'sotp
 		if(otp.equalsIgnoreCase(fOtp)) {
 			return "Otp Validate successfully";
@@ -60,7 +60,7 @@ public class EmailService {
 
 	@GetMapping("/{to}")
 	public String email(@PathVariable String to) {
-		User user=userDao.findByEmail(to);
+		User user=userDao.findByemail(to);
 		
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();

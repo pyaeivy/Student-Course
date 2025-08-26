@@ -3,7 +3,7 @@ export type Student = {
     name: string;
     phone:string;
     address:string;
-    gender?:boolean;
+    gender?:string;
     status?:string;
     
 }
