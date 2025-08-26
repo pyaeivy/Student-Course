@@ -15,7 +15,19 @@
           <div class="mb-3">
             <label for="name" class="form-label fw-semibold">Name</label>
             <input type="text" class="form-control" id="name" placeholder="Enter Your Name"
-              (input)="students.name=$event.target.value">
+              (change)="students.name=$event.target.value">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter Your Email"
+              (change)="students.email=$event.target.value">
+          </div>
+
+          <div>
+            <label for="age" class="form-label fw-semibold">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter Your Age"
+              (input)="students.age=$any($event.target).value">
           </div>
 
          

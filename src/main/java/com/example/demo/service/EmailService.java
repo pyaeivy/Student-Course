@@ -1,24 +1,17 @@
 package com.example.demo.service;
 
-import java.util.Optional;
 import java.util.Random;
-import com.example.demo.security.SecurityConfig;
 
-import jakarta.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.UserDao;
@@ -40,7 +33,11 @@ public class EmailService {
 	
 	@PostMapping("/update/{email}")
 	public String updatePassword(@PathVariable("email")String email,@RequestParam("password")String password){
+//<<<<<<< HEAD
 		User user=userDao.findByemail(email);
+//=======
+//		User user=userDao.findByEmail(email).get();
+//>>>>>>> cac06a96a305aa8e2ecd6b5980401cd6a56b306a
 		user.setPassword(passwordEncoder.encode(password));
 		userDao.save(user);
 		return "%s is successfully updated for %s".formatted(email,password);
@@ -50,7 +47,11 @@ public class EmailService {
 
 	@PostMapping("/{email}/{fOtp}")
 	public String validateOtp(@PathVariable("email")String email,@PathVariable("fOtp") String fOtp) {
+//<<<<<<< HEAD
 		User user=userDao.findByemail(email);
+//=======
+//		User user=userDao.findByEmail(email).get();
+//>>>>>>> cac06a96a305aa8e2ecd6b5980401cd6a56b306a
 	String otp=user.getOtp();//database'sotp
 		if(otp.equalsIgnoreCase(fOtp)) {
 			return "Otp Validate successfully";
@@ -60,7 +61,11 @@ public class EmailService {
 
 	@GetMapping("/{to}")
 	public String email(@PathVariable String to) {
+//<<<<<<< HEAD
 		User user=userDao.findByemail(to);
+//=======
+//		User user=userDao.findByEmail(to).get();
+//>>>>>>> cac06a96a305aa8e2ecd6b5980401cd6a56b306a
 		
 		try {
 			SimpleMailMessage message = new SimpleMailMessage();

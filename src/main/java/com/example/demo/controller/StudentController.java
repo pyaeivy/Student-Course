@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.StudentDto;
-
+import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
 
 
 @RestController
-@RequestMapping("student")
+@RequestMapping("api/student")
 public class StudentController {
 	@Autowired
 	private StudentService stuService;
@@ -34,12 +35,14 @@ public class StudentController {
 		return stuService.findStudentById(id);
 	}
 	@PostMapping("/create")
-	public StudentDto createStudent(@RequestBody StudentDto stuDto) {
-		return stuService.createStudent(stuDto);
+	public ResponseEntity<String> createStudent(@RequestBody Student stu) {
+		String returnString=stuService.createStudent(stu);
+		return ResponseEntity.ok().body(returnString);
 	}
 	@PutMapping("/{id}")
-	public StudentDto updateStudent(@PathVariable long id,@RequestBody StudentDto stuDto ) {
-		return stuService.updateStudent(id, stuDto);
+	public ResponseEntity<String> updateStudent(@PathVariable long id,@RequestBody Student stu ) {
+		String returnString=stuService.updateStudent(id, stu);
+		return ResponseEntity.ok().body(returnString);
 	}
 	@DeleteMapping("/{id}")
 	public String deleteStudent(@PathVariable long id) {

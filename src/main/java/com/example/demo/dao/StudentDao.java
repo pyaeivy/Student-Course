@@ -7,5 +7,5 @@ import com.example.demo.entity.Student;
 
 public interface StudentDao extends JpaRepository<Student, Long>{
 
-	List<Student> findByCourseId(Long id);
+	
 }

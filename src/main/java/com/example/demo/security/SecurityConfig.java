@@ -38,10 +38,15 @@ public class SecurityConfig {
 		
 		http.httpBasic(Customizer.withDefaults());
 		http.authorizeHttpRequests(c -> {
+//<<<<<<< HEAD
 
 			c.anyRequest().permitAll();
 
 			
+//=======
+//			c.requestMatchers("/api/**").permitAll();
+//			c.anyRequest().authenticated();
+//>>>>>>> cac06a96a305aa8e2ecd6b5980401cd6a56b306a
 
 		
 		});

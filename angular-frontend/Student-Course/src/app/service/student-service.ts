@@ -11,7 +11,7 @@ export class StudentService {
 
   private todosBehaviourSubject$ = new BehaviorSubject<Student[]>([]);
   public student$ = this.todosBehaviourSubject$.asObservable();
-  private backEndUrl = 'http://localhost:8080/student';
+  private backEndUrl = 'http://localhost:8080/api/student';
 
   private http = inject(HttpClient);
 
@@ -34,9 +34,9 @@ export class StudentService {
   public deleteStudentById(id:number):Observable<Student> {
     return this.http.delete<Student>(`${this.backEndUrl}/${id}`)
     .pipe(
-      tap(todo => {
+      tap(student => {
         const current = this.todosBehaviourSubject$.getValue();
-        const update = current.filter(t => t.id !== todo.id);
+        const update = current.filter(t => t.id !== student.id);
         this.todosBehaviourSubject$.next(update);
 
   }));}
@@ -56,26 +56,25 @@ export class StudentService {
 //     );
 //   }
 
-  public addStudent(student:Student):Observable<Student>{
-    return this.http.put<Student>(`${this.backEndUrl}/create`,student)
+  public addStudent(student: Student): Observable<string> {
+  return this.http.post(`${this.backEndUrl}/create`, student, { responseType: 'text' })
     .pipe(
-      tap(todo => {
-        const current = this.todosBehaviourSubject$.getValue();
-        const update  = [...current,todo];
-        this.todosBehaviourSubject$.next(update);
+      tap(messsage => {
+        console.log("Server response: " + messsage);
       })
     )
   }
 
   public updateStudent(id:number):Observable<Student>{
-    return this.http.get<Student>(`${this.backEndUrl}/${id}`)
+    return this.http.put<Student>(`${this.backEndUrl}/update/${id}`,{})
     .pipe(
-      tap(todo => {
+      tap(student => {
         const current = this.todosBehaviourSubject$.getValue();
-        const update = current.map(t => t.id === todo.id ? todo : t);
+        const update = current.map(t => t.id === student.id ? student : t);
         this.todosBehaviourSubject$.next(update);
-      }));
-    }
+      })
+    )
+  }
  
 
 
