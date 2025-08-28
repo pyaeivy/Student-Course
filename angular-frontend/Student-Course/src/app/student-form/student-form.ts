@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { StudentService } from '../service/student-service';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Student } from '../model/Student';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-student-form',
   standalone: true,
-  imports: [RouterLink,RouterModule,FormsModule],
+  imports: [RouterModule,FormsModule],
   templateUrl: './student-form.html',
   styleUrls: ['./student-form.css'] 
 })
@@ -25,9 +25,10 @@ export class StudentForm {
     status: ''
   }
 
-  constructor(private studentService:StudentService){}
+  constructor(private studentService:StudentService,private router:Router){}
 
-  onSubmit() {
+  onSubmit(event?:Event) {
+    event?.preventDefault()
 
     const newStudent: Student = {
       name: this.students.name,
@@ -43,6 +44,7 @@ export class StudentForm {
     this.studentService.addStudent(newStudent).subscribe({
       next: student => {
         console.log('Student added successfully:', student);
+        this.router.navigateByUrl('/student-list')
       },
       error: err => {
         console.error('Error adding student:', err);

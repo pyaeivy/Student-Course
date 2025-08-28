@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
 import { StudentDetails } from "../student-details/student-details";
@@ -20,6 +20,7 @@ export class StudentList {
   studentService = inject(StudentService);
 
   student$:Observable<Student[]> = this.studentService.student$;
+
 
   constructor() {
     this.student$ = this.studentService.student$;

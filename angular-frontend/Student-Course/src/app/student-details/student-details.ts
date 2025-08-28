@@ -7,7 +7,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-student-details',
-  imports: [CommonModule,RouterModule,RouterOutlet],
+  imports: [CommonModule,RouterModule],
   templateUrl: './student-details.html',
   styleUrl: './student-details.css'
 })
@@ -17,6 +17,8 @@ export class StudentDetails {
   students$!:Observable<Student[]>;
 
   studentService = inject(StudentService);
+
+
   
   
 
