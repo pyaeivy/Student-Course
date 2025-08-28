@@ -138,11 +138,10 @@
               </button>
             </div>
           </div>
-          @if (successMessage) {
-          <div class="alert alert-success mt-3">
-            {{ successMessage }}
-          </div>
-          }
+         <div class="alert alert-success mt-3" *ngIf="successMessage!=null">
+  {{ successMessage }}
+</div>
+
         </form>
       </div>
     </div>
