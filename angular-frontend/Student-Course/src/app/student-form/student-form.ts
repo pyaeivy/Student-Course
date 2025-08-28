@@ -28,17 +28,13 @@ export class StudentForm {
   constructor(private studentService: StudentService, private router: Router,private cdRef: ChangeDetectorRef) {}
 onSubmit(studentForm: NgForm) {
   if (studentForm.valid) {
-    const newStudent: Student = { ...this.students };
+    // const newStudent: Student = { ...this.students };
 
-    this.studentService.addStudent(newStudent).subscribe({
+    this.studentService.addStudent(this.students).subscribe({
       next: student => {
         console.log('Student added successfully:', student);
         this.successMessage = "Student added successfully";
-
-        // 👇 Force Angular to detect changes
         this.cdRef.detectChanges();
-
-        // Delay navigation to show alert
         setTimeout(() => {
           this.router.navigateByUrl('/student-list');
         }, 2000);

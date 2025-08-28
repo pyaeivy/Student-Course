@@ -11,8 +11,11 @@ export class AuthService {
   private auth_Url='http://localhost:8080/api/auth';
   private http=inject(HttpClient);
 
-  signUp(user:User):Observable<User>{
-    return this.http.post<User>(`${this.auth_Url}/signup`,user);
+
+
+
+  signUp(user:User):Observable<string>{
+    return this.http.post(`${this.auth_Url}/signUp`,user,{responseType:"text"});
   }
   
 }
