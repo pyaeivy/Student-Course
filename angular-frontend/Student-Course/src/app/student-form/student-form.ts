@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 import { StudentService } from '../service/student-service';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Student } from '../model/Student';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -24,26 +24,19 @@ export class StudentForm {
     gender: '',
     status: ''
   }
+  successMessage:string=''
 
   constructor(private studentService:StudentService,private router:Router){}
 
-  onSubmit(event?:Event) {
-    event?.preventDefault()
+  onSubmit(studentForm:NgForm) {
 
-    const newStudent: Student = {
-      name: this.students.name,
-      email: this.students.email,
-      age: this.students.age,
-      phone: this.students.phone,
-      address: this.students.address,
-      gender: this.students.gender,
-      status: this.students.status
-      
-    };
+
+   const newStudent: Student = { ...this.students };
 
     this.studentService.addStudent(newStudent).subscribe({
       next: student => {
         console.log('Student added successfully:', student);
+        this.successMessage="Student added successfully"
         this.router.navigateByUrl('/student-list')
       },
       error: err => {

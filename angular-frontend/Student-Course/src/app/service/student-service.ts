@@ -56,14 +56,15 @@ export class StudentService {
 //     );
 //   }
 
-  public addStudent(student: Student): Observable<string> {
-  return this.http.post(`${this.backEndUrl}/create`, student, { responseType: 'text' })
-    .pipe(
-      tap(messsage => {
-        console.log("Server response: " + messsage);
-      })
-    )
-  }
+  public addStudent(student: Student): Observable<Student> {
+  return this.http.post<Student>(`${this.backEndUrl}/create`, student).pipe(
+    tap(newStudent => {
+      const current = this.todosBehaviourSubject$.getValue();
+      this.todosBehaviourSubject$.next([...current, newStudent]); // ✅ Push new student
+    })
+  );
+}
+
 
   public updateStudent(id:number):Observable<Student>{
     return this.http.put<Student>(`${this.backEndUrl}/update/${id}`,{})
