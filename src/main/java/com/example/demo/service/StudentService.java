@@ -34,7 +34,7 @@ public class StudentService {
 				.orElseThrow(EntityNotFoundException::new);
 	}
 	
-	public String createStudent(Student stu) {
+	public StudentDto createStudent(Student stu) {
 		Student s=new Student();
 		s.setName(stu.getName());
 		s.setEmail(stu.getEmail());
@@ -44,7 +44,8 @@ public class StudentService {
 		s.setGender(stu.getGender());
 		s.setStatus(stu.getStatus());
 		studentDao.save(s);
-		return "%s is successfully created".formatted(stu.getName());
+		
+		return StudentUtil.toDto(s);
 		
 	}
 	
