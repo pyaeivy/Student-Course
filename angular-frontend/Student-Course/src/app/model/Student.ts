@@ -4,8 +4,8 @@ export type Student = {
     email: string;
     age: number;
     phone:string;
-    address:string;
-    gender?:boolean;
-    status?:string;
+    address?:string;
+    gender:string;
+    status:string;
     
 }

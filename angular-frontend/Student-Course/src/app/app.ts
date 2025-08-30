@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Header } from "./header/header";
 import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-root',
   imports: [Header],

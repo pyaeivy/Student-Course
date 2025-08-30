@@ -4,6 +4,7 @@ import { Student } from '../model/Student';
 import { StudentService } from '../service/student-service';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-student-details',
