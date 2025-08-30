@@ -7,6 +7,8 @@ import { Email } from './auth/email/email';
 import { Otp } from './auth/otp/otp';
 import { ForgetPassword } from './auth/forget-password/forget-password';
 import { StudentForm } from './student-form/student-form';
+import { StudentDetailsView } from './student-details-view/student-details-view';
+import { UpdateStudent } from './update-student/update-student';
 
 export const routes: Routes = [
     {
@@ -24,6 +26,12 @@ export const routes: Routes = [
     },
     {
         path: 'student-form',component:StudentForm
+    },
+    {
+        path: 'student-details-view/:id',component:StudentDetailsView
+    },
+    {
+        path: 'update-student/:id',component:UpdateStudent
     },
     {
         path:'email',component:Email

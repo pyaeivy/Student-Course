@@ -19,8 +19,4 @@ export class StudentDetails {
 
   studentService = inject(StudentService);
 
-
-  
-  
-
 }

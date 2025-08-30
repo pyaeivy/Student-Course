@@ -31,15 +31,16 @@ export class StudentService {
     return this.http.get<Student>(`${this.backEndUrl}/${id}`);
   }
 
-  public deleteStudentById(id:number):Observable<Student> {
-    return this.http.delete<Student>(`${this.backEndUrl}/${id}`)
-    .pipe(
-      tap(student => {
-        const current = this.todosBehaviourSubject$.getValue();
-        const update = current.filter(t => t.id !== student.id);
-        this.todosBehaviourSubject$.next(update);
+  public deleteStudentById(id: number): Observable<Student> {
+  return this.http.delete<Student>(`${this.backEndUrl}/${id}`).pipe(
+    tap(() => {
+      const current = this.todosBehaviourSubject$.getValue();
+      const update = current.filter(t => t.id !== id); 
+      this.todosBehaviourSubject$.next(update);  
+     })
+    );
+  }
 
-  }));}
 
   // getStudentById(id: number): Observable<Student> {
   //   return this.http.get<Student>(`${this.backEndUrl}/${id}`);
@@ -56,25 +57,43 @@ export class StudentService {
 //     );
 //   }
 
-  public addStudent(student: Student): Observable<string> {
-  return this.http.post(`${this.backEndUrl}/create`, student, { responseType: 'text' })
-    .pipe(
-      tap(messsage => {
-        console.log("Server response: " + messsage);
-      })
-    )
-  }
+  public addStudent(student: Student): Observable<Student> {
+  return this.http.post<Student>(`${this.backEndUrl}/create`, student).pipe(
+    tap(newStudent => {
+      const current = this.todosBehaviourSubject$.getValue();
+      this.todosBehaviourSubject$.next([...current, newStudent]); // ✅ Push new student
+    })
+  );
+}
 
-  public updateStudent(id:number):Observable<Student>{
-    return this.http.put<Student>(`${this.backEndUrl}/update/${id}`,{})
+
+// public updateStudent(id: number, updatedStudent: Student): Observable<Student> {
+//   return this.http.put<Student>(`${this.backEndUrl}/${id}`, updatedStudent).pipe(
+//     tap(student => {
+//       // After update, get the current list and update the student
+//       const current = this.todosBehaviourSubject$.getValue();
+//       const updatedList = current.map(t => t.id === student.id ? student : t);
+//       this.todosBehaviourSubject$.next(updatedList); 
+//     })
+//   );
+// }
+
+
+public updateStudent(id: number, updatedStudent: Student): Observable<string> {
+  return this.http.put<string>(`${this.backEndUrl}/${id}`, updatedStudent, { responseType: 'text' as 'json' })
     .pipe(
-      tap(student => {
+      tap(response => {
+        console.log(response);
         const current = this.todosBehaviourSubject$.getValue();
-        const update = current.map(t => t.id === student.id ? student : t);
-        this.todosBehaviourSubject$.next(update);
+        const updatedList = current.map(t => t.id === id ? updatedStudent : t);
+        this.todosBehaviourSubject$.next(updatedList);  
       })
-    )
-  }
+    );
+}
+
+
+
+
  
 
 

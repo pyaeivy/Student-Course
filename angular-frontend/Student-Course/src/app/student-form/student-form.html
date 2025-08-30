@@ -47,13 +47,13 @@
           </div> 
 
           
-          <div class="form-check">
+          <div class="form-check form-check-inline">
            <input class="form-check-input" type="radio" name="gender" id="male"
            (change)="students.gender = 'MALE'">
             <label class="form-check-label" for="male">Male</label>
           </div>
 
-          <div class="form-check">
+          <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="gender" id="female"
             (change)="students.gender = 'FEMALE'">
             <label class="form-check-label" for="female">Female</label>
@@ -79,23 +79,29 @@
       </div>
     </div> -->
 
-
-          
           <div class="mb-3">
-            <label class="form-label fw-semibold">Status</label>
-            <div class="d-flex gap-3 border-primary">
-              <div class="form-check">
-                <input class="form-check-input " type="radio" name="status" id="active" value="Active"
-                  (change)="students.status = 'Active'">
-                <label class="form-check-label border-primary" for="active">Active</label>
+              <label class="form-label fw-semibold">Status</label>
+            <div class="d-flex gap-4">
+
+    
+              <div class="form-check form-check-inline">
+                <input class="form-check-input border-success" type="radio" name="status" id="active" value="Active"
+                (change)="students.status = 'Active'">
+                <label class="form-check-label text-success fw-semibold" for="active">
+                 <i class="bi bi-check-circle-fill me-1"></i> Active </label>
               </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="status" id="inactive" value="Inactive"
-                  (change)="students.status = 'Inactive'">
-                <label class="form-check-label" for="inactive">Inactive</label>
+
+    
+              <div class="form-check form-check-inline">
+                <input class="form-check-input border-danger"  type="radio"  name="status"  id="inactive" value="Inactive"
+                (change)="students.status = 'Inactive'">
+                <label class="form-check-label text-danger fw-semibold" for="inactive">
+                  <i class="bi bi-x-circle-fill me-1"></i> Inactive </label>
               </div>
+
             </div>
           </div>
+
 
          
           <div class="d-grid mt-4">

@@ -35,8 +35,8 @@ public class StudentController {
 		return stuService.findStudentById(id);
 	}
 	@PostMapping("/create")
-	public ResponseEntity<String> createStudent(@RequestBody Student stu) {
-		String returnString=stuService.createStudent(stu);
+	public ResponseEntity<StudentDto> createStudent(@RequestBody Student stu) {
+		StudentDto returnString=stuService.createStudent(stu);
 		return ResponseEntity.ok().body(returnString);
 	}
 	@PutMapping("/{id}")

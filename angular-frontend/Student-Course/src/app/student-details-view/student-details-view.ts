@@ -1,27 +1,56 @@
 import { Component, inject, input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { Student } from '../model/Student';
 import { StudentService } from '../service/student-service';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-student-details-view',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './student-details-view.html',
   styleUrl: './student-details-view.css'
 })
 export class StudentDetailsView {
-  
-  student:Student[] = []
 
-  studentService = inject(StudentService)
+  studentService = inject(StudentService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  student$:Observable<Student[]> = this.studentService.student$;
+  student$!:Observable<Student>;
+  ngOnInit() {
 
-  constructor(){
-    this.student$ = this.studentService.student$;
-    
+    this.student$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const id = Number(params.get('id'));
+        return this.studentService.getStudentById(id);
+      })
+    );
   }
 
-  
+  delete(id: number): void {
+  this.studentService.deleteStudentById(id).subscribe({
+    next: () => {
+      
+      console.log("Successfully deleted");
+      this.router.navigate(['/student-list']);
+    },
+    error: err => console.log(err),
+    complete: () => console.log('Delete operation complete')
+  });
+}
+
+
+
+
 
 }
+
+  
+
+  
+
+  
+
+

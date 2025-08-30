@@ -1,0 +1,6 @@
+.alert {
+  transition: opacity 0.5s ease-in-out;
+}
+.alert.ng-hide {
+  opacity: 0;
+}

@@ -11,12 +11,14 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/student-list"><i class="bi bi-people-fill"></i> Student</a>
       </li>
+      <li *ngIf="authUser">{{authUser}}</li>
       <li class="nav-item">
         <a class="nav-link" href="#"><i class="bi bi-book-half"></i> Course</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/sign-in"><i class="bi bi-lock"></i>Login</a>
       </li>
+
       
     </ul>
   </div>

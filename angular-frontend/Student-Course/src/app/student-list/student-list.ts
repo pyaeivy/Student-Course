@@ -14,16 +14,18 @@ import { StudentService } from '../service/student-service';
   templateUrl: './student-list.html',
   styleUrls: ['./student-list.css']
 })
-export class StudentList {
+export class StudentList implements OnInit {
   student:Student[] = [];
 
   studentService = inject(StudentService);
 
   student$:Observable<Student[]> = this.studentService.student$;
 
+  ngOnInit(): void {
+    // this.studentService.getAllStudents().subscribe()
+  }
 
   constructor() {
-    this.student$ = this.studentService.student$;
-    this.studentService.getAllStudents().subscribe(); // ✅ Trigger initial fetch
+   
   }
 }
