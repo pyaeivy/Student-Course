@@ -17,5 +17,9 @@ export class AuthService {
   signUp(user:User):Observable<string>{
     return this.http.post(`${this.auth_Url}/signUp`,user,{responseType:"text"});
   }
+
+  login(user:User):Observable<string>{
+    return this.http.post(`${this.auth_Url}/login`,user,{responseType:"text"})
+  }
   
 }

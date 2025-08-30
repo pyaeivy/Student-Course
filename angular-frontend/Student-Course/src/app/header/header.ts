@@ -4,7 +4,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule, RouterOutlet, NgIf],
+  imports: [RouterModule, RouterOutlet],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })

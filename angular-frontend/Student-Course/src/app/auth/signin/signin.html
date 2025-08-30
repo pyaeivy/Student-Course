@@ -3,15 +3,15 @@
     <div class="row">
          <div class="col-md-6 w-50">
         <h2 class="text-center">Sign In</h2>
-        <form>
+        <form (ngSubmit)="login()">
 
             <div class="mb-3 w-75">
             <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter Email">
+            <input type="text" class="form-control" id="username" name="email" [(ngModel)]="user.email" placeholder="Enter Email">
             </div>
             <div class="mb-3  w-75">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" placeholder="Enter password">
             </div>
 
             <div><span><a routerLink="/email"><em>Forget Password</em></a></span></div>

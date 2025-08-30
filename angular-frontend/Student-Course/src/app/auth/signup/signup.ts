@@ -26,7 +26,6 @@ export class Signup {
   authUser:string=''
    
    constructor(){
-        localStorage.setItem("authUser","")
    }
 
    register(){
@@ -37,7 +36,6 @@ export class Signup {
         console.log("student Register Successfully")
         this.authUser=this.user.username as string
 
-        localStorage.setItem("authUser",this.authUser)
         this.router.navigateByUrl("/student-list")
 
       },
