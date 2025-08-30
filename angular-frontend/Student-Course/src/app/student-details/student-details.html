@@ -4,6 +4,8 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
+          <!-- <th scope="col">Email</th>
+          <th scope="col">Age</th> -->
           <th scope="col">Phone</th>
           <th scope="col">Address</th>
           <th scope="col">Gender</th>
@@ -16,6 +18,8 @@
           <tr>
             <td class="text-center">{{student.id}}</td>
             <td>{{student.name}}</td>
+            <!-- <td>{{student.email}}</td>
+            <td class="text-center">{{student.age}}</td> -->
             <td>{{student.phone}}</td>
             <td>{{student.address}}</td>
             <td class="text-center">
@@ -24,7 +28,7 @@
             <td class="text-center">
               <span 
                 class="badge" 
-                [ngClass]="student.status === 'Active' ? 'bg-success' : 'bg-secondary'">
+                [ngClass]="student.status === 'Active ' || student.status === 'active'  ? 'bg-success' : 'bg-secondary'">
                 {{student.status}}
               </span>
             </td>

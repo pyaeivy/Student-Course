@@ -5,7 +5,7 @@ export type Student = {
     age: number;
     phone:string;
     address:string;
-    gender?:string;
+    gender?:boolean;
     status?:string;
     
 }

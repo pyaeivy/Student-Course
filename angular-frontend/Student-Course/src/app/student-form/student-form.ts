@@ -21,7 +21,7 @@ export class StudentForm {
     age: 0,
     phone: '',
     address: '',
-    gender: '',
+    gender: true,
     status: ''
   }
 
