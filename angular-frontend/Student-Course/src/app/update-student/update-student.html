@@ -3,81 +3,59 @@
     Student Detail
   </div>
   <div class="card-body">
-
-    <div *ngIf="student$ | async as student">
-
+    <form (ngSubmit)="update()">
       <div class="mb-3">
         <label class="form-label fw-semibold">Name</label>
-        <input type="text" class="form-control" (change)="student.name" placeholder="{{student.name}}" >
+        <input type="text" class="form-control" [(ngModel)]="student.name" name="name" placeholder="Enter student's full name">
       </div>
 
       <div class="mb-3">
-            <label for="email" class="form-label fw-semibold">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="{{student.email}}"
-              (change)="student.email = $event.target.value" name="email">
-          </div>
+        <label class="form-label fw-semibold">Email</label>
+        <input type="email" class="form-control" [(ngModel)]="student.email" name="email" placeholder="Enter student's email address">
+      </div>
 
-          <div>
-            <label for="age" class="form-label fw-semibold">Age</label>
-            <input type="number" class="form-control" id="age" placeholder="{{student.age}}"
-             (input)="student.age = $event.target.valueAsNumber" name="age">
-          </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Age</label>
+        <input type="number" class="form-control" [(ngModel)]="student.age" name="age" placeholder="Enter student's age">
+      </div>
 
       <div class="mb-3">
         <label class="form-label fw-semibold">Phone</label>
-        <input type="text" class="form-control" (change)="student.phone" placeholder="{{student.phone}}" >
+        <input type="text" class="form-control" [(ngModel)]="student.phone" name="phone" placeholder="Enter student's phone number">
       </div>
 
       <div class="mb-3">
-            <label for="address" class="form-label fw-semibold">Address</label>
-            <textarea class="form-control" rows="3" id="address" placeholder="{{student.address}}"
-             #addr (input)="student.address = addr.value" name="address"></textarea>
-          </div> 
-
-          <div class="form-check form-check-inline">
-           <input class="form-check-input" type="radio" name="gender" id="male"
-           (change)="student.gender = 'MALE'">
-            <label class="form-check-label" for="male">Male</label>
-          </div>
-
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="gender" id="female"
-            (change)="student.gender = 'FEMALE'">
-            <label class="form-check-label" for="female">Female</label>
-          </div>
+        <label class="form-label fw-semibold">Address</label>
+        <textarea class="form-control" rows="3" [(ngModel)]="student.address" name="address" placeholder="Enter student's address"></textarea>
+      </div>
 
       <div class="mb-3">
-              <label class="form-label fw-semibold">Status</label>
-            <div class="d-flex gap-4">
+        <label class="form-label fw-semibold">Gender</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="student.gender" name="gender" value="MALE">
+          <label class="form-check-label">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="student.gender" name="gender" value="FEMALE">
+          <label class="form-check-label">Female</label>
+        </div>
+      </div>
 
-    
-              <div class="form-check form-check-inline">
-                <input class="form-check-input border-success" type="radio" name="status" id="active" value="Active"
-                (change)="student.status = 'Active'">
-                <label class="form-check-label text-success fw-semibold" for="active">
-                 <i class="bi bi-check-circle-fill me-1"></i> Active </label>
-              </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Status</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="student.status" name="status" value="Active">
+          <label class="form-check-label text-success fw-semibold">Active</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" [(ngModel)]="student.status" name="status" value="Inactive">
+          <label class="form-check-label text-danger fw-semibold">Inactive</label>
+        </div>
+      </div>
 
-    
-              <div class="form-check form-check-inline">
-                <input class="form-check-input border-danger"  type="radio"  name="status"  id="inactive" value="Inactive"
-                (change)="student.status = 'Inactive'">
-                <label class="form-check-label text-danger fw-semibold" for="inactive">
-                  <i class="bi bi-x-circle-fill me-1"></i> Inactive </label>
-              </div>
-
-            </div>
-          </div>
-
-      
       <div class="d-flex justify-content-between">
-        <button class="btn btn-success" (click)="update(student.id!)" routerLink="/student-list">
-          Update Student
-        </button>
+        <button class="btn btn-success" type="submit">Update Student</button>
       </div>
-      
-
-    </div>
-
+    </form>
   </div>
 </div>

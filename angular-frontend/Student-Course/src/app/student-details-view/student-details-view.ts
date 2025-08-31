@@ -16,30 +16,20 @@ export class StudentDetailsView {
 
   studentService = inject(StudentService);
   private route = inject(ActivatedRoute);
-  private router = inject(Router);
 
   student$!:Observable<Student>;
+  id!:number
   ngOnInit() {
 
     this.student$ = this.route.paramMap.pipe(
       switchMap(params => {
-        const id = Number(params.get('id'));
-        return this.studentService.getStudentById(id);
+       this.id= Number(params.get('id'));
+        return this.studentService.getStudentById(this.id);
       })
     );
   }
 
-  delete(id: number): void {
-  this.studentService.deleteStudentById(id).subscribe({
-    next: () => {
-      
-      console.log("Successfully deleted");
-      this.router.navigate(['/student-list']);
-    },
-    error: err => console.log(err),
-    complete: () => console.log('Delete operation complete')
-  });
-}
+
 
 
 

@@ -14,18 +14,15 @@ import { StudentService } from '../service/student-service';
   templateUrl: './student-list.html',
   styleUrls: ['./student-list.css']
 })
-export class StudentList implements OnInit {
-  student:Student[] = [];
+export class StudentList {
 
   studentService = inject(StudentService);
 
   student$:Observable<Student[]> = this.studentService.student$;
-
-  ngOnInit(): void {
-    // this.studentService.getAllStudents().subscribe()
+  constructor(){
   }
 
-  constructor() {
-   
-  }
+
+
+ 
 }

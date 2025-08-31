@@ -22,6 +22,9 @@ export class StudentService {
     ).subscribe();
    }
 
+  
+
+
 
   public getAllStudents():Observable<Student[]> {
     return this.http.get<Student[]>(`${this.backEndUrl}/all`);
@@ -31,15 +34,17 @@ export class StudentService {
     return this.http.get<Student>(`${this.backEndUrl}/${id}`);
   }
 
-  public deleteStudentById(id: number): Observable<Student> {
-  return this.http.delete<Student>(`${this.backEndUrl}/${id}`).pipe(
+public deleteStudentById(id: number): Observable<string> {
+  return this.http.delete(`${this.backEndUrl}/${id}`,{responseType:'text'}).pipe(
     tap(() => {
       const current = this.todosBehaviourSubject$.getValue();
-      const update = current.filter(t => t.id !== id); 
-      this.todosBehaviourSubject$.next(update);  
-     })
-    );
-  }
+      const updated = current.filter(s => s.id !== id);
+      this.todosBehaviourSubject$.next(updated);
+    })
+  );
+}
+
+
 
 
   // getStudentById(id: number): Observable<Student> {

@@ -1,43 +1,69 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { StudentService } from '../service/student-service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
 import { Student } from '../model/Student';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-update-student',
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './update-student.html',
   styleUrls: ['./update-student.css']
 })
-export class UpdateStudent {
+export class UpdateStudent implements OnInit {
 
-  studentService = inject(StudentService);
+  private studentService = inject(StudentService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
-  student$!: Observable<Student>;
+  student: Student = {
+    id: 0, // Add id if backend needs it
+    name: '',
+    email: '',
+    age: 0,
+    phone: '',
+    address: '',
+    gender: '',
+    status: ''
+  };
 
-  ngOnInit() {
-    this.student$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        const id = Number(params.get('id'));
-        return this.studentService.getStudentById(id);
-      })
-    );
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (isNaN(id)) {
+      console.error('Invalid student ID');
+      return;
+    }
+
+    this.studentService.getStudentById(id).subscribe({
+      next: (data) => {
+        this.student = data;
+      },
+      error: (err) => {
+        console.error('Failed to fetch student:', err);
+      }
+    });
   }
 
-  update(id: number) {
-    this.student$.subscribe(student => {
-      this.studentService.updateStudent(id, student).subscribe({
-        next: () => {
-          console.log("Successfully updated");
-          this.router.navigate(['/student-list']); 
-        },
-        error: err => console.log(err),
-        complete: () => console.log("Update operation complete")
-      });
+  update(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (isNaN(id)) {
+      console.error('Invalid student ID');
+      return;
+    }
+
+    this.studentService.updateStudent(id, this.student).subscribe({
+      next: (res) => {
+        console.log('Successfully updated:', res);
+        this.router.navigate(['/student-list']);
+      },
+      error: (err) => {
+        console.error('Update failed:', err);
+      },
+      complete: () => {
+        console.log('Update operation complete');
+      }
     });
   }
 }
