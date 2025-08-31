@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h1 class="text-center fs-2 fw-bold">Course Details</h1>
+</div>
+<div class="container mt-5 offset-1" >
+   @if (course$ | async; as course) {
+    <div class="row">
+        <div class="col-md-6">
+            <div class="">
+                <div class="position-relative">
+                    <img [src]="course.courseImg" [alt]="course.courseName" class="position-relative"/>
+                    <p class="position-absolute mt-2 bg-primary text-white rounded-5 px-2 top-0">Featured Course</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 position-relative mt-5">
+            <h2>{{ course.courseName }}</h2>
+            <p>{{ course.description }}</p>
+            <p><i class="bi bi-cash-coin"></i> Price: {{ course.price }}</p>
+            <p><i class="bi bi-award-fill text-primary"></i> Instructor: {{ course.instructor }}</p>
+            <button class="btn btn-primary px-3" routerLink="/add-student"><i class="bi bi-rocket-takeoff-fill"></i> Enroll now</button>
+        </div>
+
+    
+    
+    </div>
+   }
+</div>
