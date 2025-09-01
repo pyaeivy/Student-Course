@@ -1,0 +1,57 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped align-middle">
+    <thead class="table-success text-center">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <!-- <th scope="col">Email</th>
+          <th scope="col">Age</th> -->
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (student of (students$ | async); track student.id) {
+      <tr>
+        <td class="text-center">{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.address }}</td>
+        <td class="text-center">
+          <span class="badge bg-info">{{ student.gender }}</span>
+        </td>
+        <td class="text-center">
+          <span
+            class="badge"
+            [ngClass]="
+              student.status === 'Active ' || student.status === 'active'
+                ? 'bg-success'
+                : 'bg-secondary'
+            "
+          >
+            {{ student.status }}
+          </span>
+        </td>
+        <td class="d-flex text-center">
+          <button class="btn btn-primary btn-sm">
+            <i
+              class="bi bi-arrow-right"
+              [routerLink]="['/student-details-view', student.id]"
+            ></i>
+          </button>
+
+          <button
+            class="btn btn-danger ms-2"
+            (click)="delete(student.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

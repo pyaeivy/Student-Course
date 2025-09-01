@@ -1,0 +1,33 @@
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <img src="assets/images/4534251_19466.jpg" class="img-fluid" alt="Sign In Image"/>
+        </div>
+      
+        <div class="col-md-6 w-50">
+        <h2 class="text-center"><em><strong>Register</strong></em></h2>
+        <form (ngSubmit)="register()">
+            <div class="mb-3 w-75">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" [(ngModel)]="user.username"/>
+            </div>
+            <div class="mb-3 w-75">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Email" name="email" [(ngModel)]="user.email">
+            </div>
+            <div class="mb-3 w-75">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" [(ngModel)]="user.password">
+            </div>
+             <div class="mb-3 w-75">
+            <label for="phone" class="form-label">Phone</label>
+            <input type="phone" class="form-control" id="phone" placeholder="Enter Your Number" name="phoneNumber" [(ngModel)]="user.phoneNumber">
+            </div>
+            <button type="submit" class="btn btn-primary">Register  <i class="bi bi-box-arrow-in-right"></i></button>
+                 
+
+        </form>
+        </div>
+    </div>
+</div>
